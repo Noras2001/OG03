@@ -19,6 +19,8 @@ target_height = 80
 target_x = random.randint(0, SCREEN_WIDTH - target_width)
 target_y = random.randint(0, SCREEN_HEIGHT - target_height)
 
+
+#рандомное значение заливки фона
 color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
 
 # Скорость движения таргета по осям x и y
@@ -29,8 +31,8 @@ speed_y = random.randint(-5, 5)
 
 
 
-running = True
-while running:
-    pass
+#running = True
+#while running:
+#    pass
 
 pygame.quit()
