@@ -13,11 +13,13 @@ icon = pygame.image.load("images/icono.jpg")
 pygame.display.set_icon(icon)
 
 target = pygame.image.load("img/target.png")
-target_width = 118
-target_height = 118
+target_width = 80
+target_height = 80
 
 target_x = random.randint(0, SCREEN_WIDTH - target_width)
 target_y = random.randint(0, SCREEN_HEIGHT - target_height)
+
+color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
 
 # Скорость движения таргета по осям x и y
 speed_x = random.randint(-5, 5)
