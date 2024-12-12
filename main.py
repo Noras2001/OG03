@@ -2,7 +2,7 @@ import pygame
 
 pygame.init()
 
-running = True
+running = False
 while running:
     pass
 
