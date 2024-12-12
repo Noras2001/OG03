@@ -19,14 +19,18 @@ target_height = 80
 target_x = random.randint(0, SCREEN_WIDTH - target_width)
 target_y = random.randint(0, SCREEN_HEIGHT - target_height)
 
-
-#рандомное значение заливки фона
+# рандомное значение заливки фона
 color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
 
 # Скорость движения таргета по осям x и y
 speed_x = random.randint(-5, 5)
 speed_y = random.randint(-5, 5)
 
+# переменные для мерцания
+hit = False
+flash_timer = 0
+flash_duration = 500  # длительность мерцания в миллисекундах
+flash_interval = 100  # интервал мерцания
 
 running = True
 while running:
@@ -37,9 +41,23 @@ while running:
         if event.type == pygame.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = pygame.mouse.get_pos()
             if target_x < mouse_x < target_x + target_width and target_y < mouse_y < target_y + target_height:
-                target_x = random.randint(0, SCREEN_WIDTH - target_width)
-                target_y = random.randint(0, SCREEN_HEIGHT - target_height)
-    screen.blit(target, (target_x, target_y))
+                hit = True
+                flash_timer = pygame.time.get_ticks()
+
+    # логика мерцания
+    current_time = pygame.time.get_ticks()
+    if hit:
+        if (current_time - flash_timer) < flash_duration:
+            # меняем отображение каждые flash_interval миллисекунд
+            if (current_time // flash_interval) % 2 == 0:
+                screen.blit(target, (target_x, target_y))
+        else:
+            hit = False  # сбрасываем флаг после завершения мерцания
+            target_x = random.randint(0, SCREEN_WIDTH - target_width)
+            target_y = random.randint(0, SCREEN_HEIGHT - target_height)
+    else:
+        screen.blit(target, (target_x, target_y))
+
     pygame.display.update()
 
 pygame.quit()
